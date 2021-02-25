@@ -20,7 +20,7 @@ def get_input(file_path):
 		for j in range(int(num_cars)):
 			street_names = f.readline().split()[1:]
 
-			car_paths.append(Car(street_names))
+			car_paths.append(Car(tuple(street_names)))
 		
 	return InputCluster(int(deadline), int(num_intersections), int(num_streets), int(num_cars), int(fixed_bonus_points),
 						streets, car_paths)
