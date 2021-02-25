@@ -1,0 +1,32 @@
+Searching 20 files for "print" (case sensitive)
+
+\\wsl$\Ubuntu-20.04\home\roeiy\projects\givehim\inputparser.py:
+   25  		for j in range(int(num_cars)):
+   26  			street_names = f.readline().split()[1:]
+   28  			car_paths.append(Car(tuple([get_street_by_name(streets,streetname) for streetname in street_names])))
+   29  		
+
+\\wsl$\Ubuntu-20.04\home\roeiy\projects\givehim\main.py:
+   27  	submit_info_to_submit_file("output.txt", si)
+   28  
+   29: 	print("Started running ...")
+   30  
+   31  def get_street_by_name(all_street,name):
+
+\\wsl$\Ubuntu-20.04\home\roeiy\projects\givehim\submit.py:
+   32  
+   33  def submit_file_to_submit_info(sf_path ,librarys):
+   34: 	print("not Implemented") # doesnt worth the time
+   35  	exit(1)
+   36  	# with open(sf_path) as sf:
+
+\\wsl$\Ubuntu-20.04\home\roeiy\projects\givehim\test.py:
+    9  
+   10  def main():
+   11: 	print("Started running ...")
+   12  	ic = get_input(file_path)
+   13: 	print(ic)
+   14  	import IPython
+   15  	IPython.embed()
+
+5 matches across 4 files

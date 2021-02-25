@@ -2,11 +2,15 @@
 
 from car import Car
 from street import Street
-from traffic_light import TrafficLight
-from intersection import Intersection
+from submit import SubmitInfo
+from inputparser import get_input
+
+file_path = "data-sets/a.txt"
 
 def main():
 	print("Started running ...")
+	ic = get_input(file_path)
+	print(ic)
 	import IPython
 	IPython.embed()
 
