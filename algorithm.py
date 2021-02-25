@@ -56,4 +56,4 @@ def omri_algorithm(cars : List[Car]):
     for street, times in streets_traffics.items():
         out.append(StreetWithSchedule(street.name, get_avg_sequenced_times(times)))
 
-    return out
+    return (out, flowchart)
