@@ -1,7 +1,7 @@
-from path import Path
 from dataclasses import dataclass
-from typing import List
+from typing import List, Text
+from street import Street
 
-@dataclass
+@dataclass(frozen=True)
 class Car:
-	paths : List[Path]
+	paths : List[Street]
