@@ -2,8 +2,9 @@ from dataclasses import dataclass
 from typing import List
 
 @dataclass
-class SubmitInfo():
-	intersections : List[IntersectionWithSchedule]
+class StreetWithSchedule:
+	street : str # Intersection or id
+	duration : int # duration of green light
 
 @dataclass
 class IntersectionWithSchedule:
@@ -11,9 +12,8 @@ class IntersectionWithSchedule:
 	streets_with_schedule : List[StreetWithSchedule] # the first one are the first r
 
 @dataclass
-class StreetWithSchedule:
-	street : Street # Intersection or id
-	duration : int # duration of green light
+class SubmitInfo():
+	intersections : List[IntersectionWithSchedule]
 
 def submit_info_to_submit_file(sf_path, si : SubmitInfo):
 	lines_list = []
@@ -21,10 +21,10 @@ def submit_info_to_submit_file(sf_path, si : SubmitInfo):
 	lines_list.append(str(len(si.intersections)))
 
 	for intersection in si.intersections:
-		lines_list.append(str(intersection))		
+		lines_list.append(str(intersection.intersection))		
 		lines_list.append(str(len(intersection.streets_with_schedule)))
 		for street_with_schedule in intersection.streets_with_schedule:
-			lines_list.append(f"{street_with_schedule.street.name} {str(street_with_schedule.duration)}")
+			lines_list.append(f"{street_with_schedule.street} {str(street_with_schedule.duration)}")
 
 	with open(sf_path,'w') as sf:
 		#sf.writelines(lines_list)
