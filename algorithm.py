@@ -3,17 +3,22 @@ from submit import StreetWithSchedule
 from typing import List
 from flow_chart import get_initial_flow
 
-def calculate_total_path_duration(car : Car):
+def get_street_by_name(all_street,name):
+    for street in all_street:
+        if street.name == name:
+            return street
+
+def calculate_total_path_duration(car : Car,all_street):
     result = 0
     for path in car.paths:
         result += path.L + 1
 
     return result - 1
 
-def remove_non_realistic_cars(cars : List[Car], deadline : int):
+def remove_non_realistic_cars(cars : List[Car], deadline : int,all_street):
     """Gets list of cars with their paths and returns list without the unrealistic cars"""
     for car in cars:
-        if calculate_total_path_duration(car) >= deadline:
+        if calculate_total_path_duration(car,all_street) >= deadline:
             cars.remove(car)
 
     return cars
@@ -36,24 +41,24 @@ def get_avg_sequenced_times(times : List[int]):
     while len(times) != 0:
         curr_seq = get_sequenced_times(times)
         times = times[curr_seq:]
-        sequences.append(sequences)
+        sequences.append(curr_seq)
 
     avg = 0
     for sequence in sequences:
         avg += sequence
 
     avg /= len(sequences)
-    return avg
+    return int(avg)
 
-def omri_algorithm(cars : List[Car]):
-    cars = remove_non_realistic_cars(cars)
+def omri_algorithm(cars : List[Car], deadline,all_street):
+    cars = remove_non_realistic_cars(cars,deadline,all_street)
 
     flowchart = get_initial_flow(cars)
-    streets_traffics = { street: sorted_arrivals.values().sort() for street, sorted_arrivals in flowchart.car_street_times.items()}
+    streets_traffics = { street: list(sorted_arrivals.values()) for street, sorted_arrivals in flowchart.car_street_times.items()}
 
     out = []
 
     for street, times in streets_traffics.items():
-        out.append(StreetWithSchedule(street.name, get_avg_sequenced_times(times)))
+        out.append(StreetWithSchedule(street.name, get_avg_sequenced_times(list(times))))
 
     return (out, flowchart)

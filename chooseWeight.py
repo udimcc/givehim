@@ -5,9 +5,9 @@ from street import Street
 
 initialFlowRet = get_initial_flow()
 
-def weightByMoreCars(carsStatuses: dict, timeForEnd:list):
+# def weightByMoreCars(carsStatuses: dict, timeForEnd:list):
 
-def weightByLessTime(carsEnriesTime: list, timeForEnd:list):
+# def weightByLessTime(carsEnriesTime: list, timeForEnd:list):
 
 def streetAverage(timeForEnd:list):
     average = 0
