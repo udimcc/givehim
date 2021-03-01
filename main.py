@@ -1,15 +1,16 @@
 # this file should be the main file that will be the final solution
 
-from inputparser import get_input
+from inputparser import get_input, get_street_by_name
 from algorithm import *
 from submit import *
+from time import time
 import sys
-from functools import lru_cache
 
-def main():
-	file_path = sys.argv[1] 
+def main(file_path):
+	initial_time = time()
 	print(f"Working on {file_path}")
 	ic = get_input(file_path)
+	print("Started running ...",)
 
 	all_street = tuple(ic.streets)
 
@@ -27,21 +28,16 @@ def main():
 
 	submit_info_to_submit_file(f"output-{file_path.split('/')[-1]}", si)
 
-	print("Started running ...")
-
-@lru_cache
-def get_street_by_name(all_street,name):
-	for street in all_street:
-		if street.name == name:
-			return street
+	print(f"{file_path} is finished in {time()-initial_time}")
 
 def sws_to_intersection_list(all_street, intersection_lst,streets_with_schedule):
 	for sws in streets_with_schedule:
 		intersection_lst[get_street_by_name(all_street,sws.street).end].streets_with_schedule.append(sws)
 	for strt in all_street:
-		if not strt.name in intersection_lst[strt.end].streets_with_schedule:
+		if not strt.name in [stwsc.street for stwsc in intersection_lst[strt.end].streets_with_schedule]:
 			intersection_lst[strt.end].streets_with_schedule.append(StreetWithSchedule(strt.name,0))
 
 
 if __name__ == '__main__':
-	main()
+	for fp in sys.argv[1:]:
+		main(fp)
