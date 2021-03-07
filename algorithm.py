@@ -4,6 +4,12 @@ from typing import List
 from flow_chart import get_initial_flow
 from functools import lru_cache
 
+@lru_cache
+def get_street_by_name(all_street,name):
+    for street in all_street:
+        if street.name == name:
+            return street
+
 def calculate_total_path_duration(car : Car,all_street):
     result = 0
     for path in car.paths:
