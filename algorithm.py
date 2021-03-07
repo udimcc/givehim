@@ -2,9 +2,7 @@ from car import Car
 from submit import StreetWithSchedule
 from typing import List
 from flow_chart import get_initial_flow
-from functools import lru_cache
 
-@lru_cache
 def get_street_by_name(all_street,name):
     for street in all_street:
         if street.name == name:
