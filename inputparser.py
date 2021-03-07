@@ -3,9 +3,7 @@ from car import Car
 from street import Street
 from dataclasses import dataclass
 from typing import List
-from functools import lru_cache
 
-@lru_cache
 def get_street_by_name(all_street,name):
     for street in all_street:
         if street.name == name:
@@ -22,13 +20,11 @@ def get_input(file_path):
 
 			streets.append(Street(int(length), int(start_intersection), int(end_intersection), street_name ))
 
-		streets_as_tuple = tuple(streets)
-
 		car_paths = []
 
 		for j in range(int(num_cars)):
 			street_names = f.readline().split()[1:]
-			car_paths.append(Car((get_street_by_name(streets_as_tuple,streetname) for streetname in street_names)))
+			car_paths.append(Car(tuple([get_street_by_name(streets,streetname) for streetname in street_names])))
 		
 	return InputCluster(int(deadline), int(num_intersections), int(num_streets), int(num_cars), int(fixed_bonus_points),
 						streets, car_paths)
